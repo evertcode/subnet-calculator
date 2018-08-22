@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" ng-app="appSubnet">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Subnet Calculator</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-71416629-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+</head>
+
+<body class="text-center">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead">
+            <div class="inner">
+                <h3 class="masthead-brand">Subnet Calculator</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active" href="#">CIDR</a>
+                    <a class="nav-link disabled" href="#">VLSM</a>
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover" ng-controller="ctrlCIDR as cidr">
+            <div class="row">
+                <p class="justify">CIDR or Classless Inter Domain Routing was developed to reduce the increasing size of routing tables of large
+                    routers, which was quite hard with classful routing. The memory usage of classful routing is enormous,
+                    which results in unreasonable expensive hadware. But also the performance was compromised, since large
+                    tables need to be looked up without a more dynamic IP interval mechanism, like CIDR imposes. Another
+                    problem with a classful setup is, that the bandwidth usage is quite high when routers exchange their
+                    routing information.</p>
+            </div>
+            <div class="row" style="margin-top: 40px;">
+                <div class="col-sm">
+                    <span>
+                        <input type="text" maxlength="3" id="octet-one" placeholder="192" ng-model="cidr.octetOne" ng-keyup="cidr.calculate()">
+                        <span class="dot">.</span>
+                    </span>
+                </div>
+                <div class="col-sm">
+                    <span>
+                        <input type="text" maxlength="3" id="octet-two" placeholder="168" ng-model="cidr.octetTwo" ng-keyup="cidr.calculate()">
+                        <span class="dot">.</span>
+                    </span>
+                </div>
+                <div class="col-sm">
+                    <span>
+                        <input type="text" maxlength="3" id="octet-three" placeholder="2" ng-model="cidr.octetThree" ng-keyup="cidr.calculate()">
+                        <span class="dot">.</span>
+                    </span>
+                </div>
+                <div class="col-sm">
+                    <span>
+                        <input type="text" maxlength="3" id="octet-four" placeholder="38" ng-model="cidr.octetFour" ng-keyup="cidr.calculate()">
+                        <span class="dot">/</span>
+                    </span>
+                </div>
+                <div class="col-sm">
+                    <span>
+                        <input type="text" maxlength="2" id="prefix" placeholder="24" ng-model="cidr.prefix" ng-keyup="cidr.calculate()">
+                        <span class="dot"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 65px;">
+                <div class="col-sm">
+                    <span class="netmask">
+                        <span class="value">{{cidr.mask}}</span>
+                        <span class="label">Netmask</span>
+                    </span>
+                </div>
+                <div class="col-sm">
+                    <span class="first">
+                        <span class="value">{{cidr.first}}</span>
+                        <span class="label">First IP</span>
+                    </span>
+                </div>
+                <div class="col-sm">
+                    <span class="last">
+                        <span class="value">{{cidr.last}}</span>
+                        <span class="label">Last IP</span>
+                    </span>
+                </div>
+                <div class="col-sm">
+                    <span class="count">
+                        <span class="value">{{cidr.hosts}}</span>
+                        <span class="label">Count</span>
+                    </span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Subnet Calculator, by
+                    <a href="https://github.com/evertcode" target="_blank">evertcode</a>.</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script>
+        window.jQuery || document.write('<script src="assets/plugins/jquery-slim.min.js"><\/script>')
+    </script>
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/netmask.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script src="app/components/cidr/cidr.js"></script>
+    <script src="app/app.module.js"></script>
+
+</body>
+
+</html>
